@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GitHub Issues Tracker</title>
+
+    <!-- google font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- tailwind css -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <link rel="stylesheet" href="./style/style.css" />
+  </head>
+  <body class="bg-[#f3f4f6]">
+    <section id="login-page">
+      <div class="grid mt-[85px] mb-[85px] place-items-center">
+        <div class="w-[520px] h-auto bg-[#ffffffFF] p-8 rounded-xl">
+          <div class="github-info flex items-center flex-col">
+            <img
+              class="w-[100px] h-[100px] mb-6"
+              src="./assets/github-logo.png"
+              alt="github-logo"
+            />
+            <p class="text-[#1f2937FF] text-2xl font-semibold mb-1">
+              GitHub Issues Tracker
+            </p>
+            <p class="text-[#64748bFF] mb-6">Sign in to manage your issues</p>
+          </div>
+          <div>
+            <div class="flex items-center justify-center">
+              <div class="w-full max-w-md p-8 rounded-xl">
+                <!-- Username -->
+                <label class="block text-gray-700 font-medium mb-2">
+                  Username
+                </label>
+                <input
+                  type="text"
+                  placeholder="Enter Username"
+                  class="w-full px-4 py-2 mb-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+                />
+                <p class="text-sm text-purple-600 mb-4">Default: admin</p>
+
+                <!-- Password -->
+                <label class="block text-gray-700 font-medium mb-2">
+                  Password
+                </label>
+                <input
+                  type="password"
+                  placeholder="Enter Password"
+                  class="w-full px-4 py-2 mb-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+                />
+                <p class="text-sm text-purple-600 mb-6">Default: admin123</p>
+
+                <!-- Button -->
+                <button
+                  id="login-btn"
+                  onclick="loginClick()"
+                  class="w-full py-3 text-white font-semibold rounded-lg bg-gradient-to-r from-purple-700 to-indigo-600 hover:from-purple-800 hover:to-indigo-700 transition duration-200"
+                >
+                  Sign In
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
