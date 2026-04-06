@@ -1,4 +1,3 @@
-<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -19,9 +18,11 @@
     <link rel="stylesheet" href="./style/style.css" />
   </head>
   <body class="bg-[#f3f4f6]">
-    <section id="login-page">
+    <section id="login-page" class="hidden">
       <div class="grid mt-[85px] mb-[85px] place-items-center">
-        <div class="w-[520px] h-auto bg-[#ffffffFF] p-8 rounded-xl">
+        <div
+          class="w-fit sm:w-[520px] h-auto bg-red-700 sm:bg-[#ffffffFF] p-8 rounded-xl"
+        >
           <div class="github-info flex items-center flex-col">
             <img
               class="w-[100px] h-[100px] mb-6"
@@ -41,6 +42,7 @@
                   Username
                 </label>
                 <input
+                  id="username"
                   type="text"
                   placeholder="Enter Username"
                   class="w-full px-4 py-2 mb-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
@@ -52,6 +54,7 @@
                   Password
                 </label>
                 <input
+                  id="password"
                   type="password"
                   placeholder="Enter Password"
                   class="w-full px-4 py-2 mb-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
@@ -72,5 +75,134 @@
         </div>
       </div>
     </section>
+    <section>
+      <nav
+        class="bg-[#ffffffFF] py-2 sm:py-5 flex sm:justify-around sm:items-center flex-col sm:flex-row sm:w-full sm:m-0 m-5"
+        id="nav-bar"
+      >
+        <div
+          class="flex sm:items-center gap-3 justify-center sm:flex-row items-center flex-col"
+        >
+          <img
+            class="h-[40px] w-[40px]"
+            src="./assets/github-logo.png"
+            alt=""
+          />
+          <p class="text-2xl font-semibold mb-6 sm:mb-0">
+            GitHub Issues Tracker
+          </p>
+        </div>
+
+        <div class="flex items-center sm:gap-2 flex-col sm:flex-row gap-5">
+          <label
+            class="flex items-center gap-3 px-4 py-3 bg-white border border-gray-300 rounded-xl shadow-sm"
+          >
+            <!-- icon -->
+            <svg
+              class="w-5 h-5 text-gray-400"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <circle cx="11" cy="11" r="8"></circle>
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="m21 21-4.3-4.3"
+              ></path>
+            </svg>
+
+            <!-- input -->
+            <input
+              type="search"
+              placeholder="Search issues..."
+              class="w-full outline-none text-gray-600 placeholder-gray-400"
+            />
+          </label>
+          <button class="bg-[#4a00ffFF] rounded-lg">
+            <p class="px-4 py-3 text-base font-semibold text-white">
+              + New Issue
+            </p>
+          </button>
+        </div>
+      </nav>
+      <!-- tab bar -->
+      <div
+        class="max-w-5xl mx-auto mt-[60px] bg-[#ffffffFF] p-6 rounded-lg shadow-lg"
+      >
+        <div class="">
+          <button
+            id="all-btn"
+            class="bg-[#4a00ffFF] w-[120px] h-[40px] rounded text-white"
+          >
+            All
+          </button>
+          <button
+            id="open-btn"
+            class="bg-white w-[120px] h-[40px] rounded text-black border border-[#e4e4e7FF] hover:bg-[#00a96eFF] hover:text-white"
+          >
+            Open
+          </button>
+          <button
+            id="close-btn"
+            class="bg-white w-[120px] h-[40px] rounded text-black border border-[#e4e4e7FF] hover:bg-[#a855f7FF] hover:text-white"
+          >
+            Close
+          </button>
+          <!-- <button
+            id="logout-btn"
+            onclick="logout()"
+            class="w-[120px] h-[40px] rounded text-white bg-gradient-to-r from-[#a855f7FF] to-[#4a00ffFF] hover:from-[#9333ea] hover:to-[#4338ca] transition duration-200 shadow-sm float-end"
+          >
+            Logout
+          </button> -->
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="mt-4 max-w-5xl mx-auto bg-[#ffffffFF] p-6 rounded-lg">
+        <div class="flex justify-between items-center">
+          <div class="flex items-center gap-2">
+            <div class="w-[50px] bg-[#ece4ffFF] rounded-full">
+              <img class="p-2" src="./assets/Aperture.png" alt="" />
+            </div>
+            <div>
+              <p
+                id="issue-count"
+                class="text-[#1f2937FF] font-semibold text-xl"
+              >
+                50 Issues
+              </p>
+              <p class="text-[#64748bFF]">
+                Track and manage your project issues
+              </p>
+            </div>
+          </div>
+          <div class="flex items-center gap-2">
+            <img src="./assets/Open-Status.png" alt="" />
+            <p class="text-[#1f2937FF] font-medium">open</p>
+            <img src="./assets/Closed- Status .png" alt="" />
+            <p class="text-[#1f2937FF] font-medium">Closed</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="bg-[#FBFBFB] max-w-5xl mx-auto">
+        <div
+          class="p-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
+          id="card-container"
+        >
+          <!-- GitHub issue cards will be dynamically inserted here -->
+        </div>
+      </div>
+    </section>
+    <script src="./src/script.js"></script>
   </body>
 </html>
+<!-- <p class=""></p> -->
+<!-- <img src="./assets/" alt=""> -->
+<!-- <p>Assignee: ${element.assignee}</p> -->
+<!-- <p>Created At: ${element.createdAt}</p> -->
