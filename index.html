@@ -21,12 +21,11 @@
       rel="stylesheet"
       type="text/css"
     />
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
     <link rel="stylesheet" href="./style/style.css" />
   </head>
-  <body class="">
-    <section id="login-page" class="">
+  <body>
+    <section id="login-page">
       <div class="grid mt-[85px] mb-[85px] place-items-center">
         <div
           class="w-fit sm:w-[520px] h-auto bg-[#ffffffFF] sm:bg-[#ffffffFF] p-8 rounded-xl shadow-[0_10px_30px_#00000014]"
@@ -86,7 +85,6 @@
     <section id="nav-bar" class="hidden">
       <nav
         class="bg-[#ffffffFF] py-3 sm:py-5 flex sm:justify-around sm:items-center flex-col sm:flex-row sm:w-full sm:m-0 m-2 shadow-[0_10px_30px_#00000014]"
-        id="nav-bar"
       >
         <div
           class="flex sm:items-center gap-3 justify-center sm:flex-row items-center flex-col"
@@ -127,10 +125,13 @@
               id="input-search"
               type="search"
               placeholder="Search issues..."
-              class="w-full outline-none text-gray-600 placeholder-gray-400"
+              class="w-full border-0 bg-transparent text-gray-600 outline-none appearance-none placeholder-gray-400"
             />
           </label>
-          <button id="search-btn" class="bg-[#4a00ffFF] rounded-lg">
+          <button
+            id="search-btn"
+            class="bg-[#4a00ffFF] rounded-lg hover:cursor-pointer"
+          >
             <p class="px-4 py-3 text-base font-semibold text-white">Search</p>
           </button>
         </div>
@@ -159,12 +160,6 @@
             Close
           </button>
         </div>
-        <!-- <button
-          id="logout-btn"
-          class="w-[120px] h-[40px] rounded text-white bg-gradient-to-r from-[#a855f7FF] to-[#4a00ffFF] hover:from-[#9333ea] hover:to-[#4338ca] transition duration-200 shadow-sm hover:cursor-pointer"
-        >
-          Logout
-        </button> -->
       </div>
     </section>
     <section id="text-bar" class="hidden">
@@ -198,9 +193,7 @@
     <!-- modal section -->
     <dialog id="my_modal_5" class="modal modal-bottom sm:modal-middle">
       <div class="modal-box">
-        <!-- <h3 class="text-lg font-bold">Hello!</h3>
-        <p class="py-4">Press ESC key or click the button below to close</p> -->
-        <div class="modal-action" id="issues-detailes-modal">
+        <div class="modal-action" id="issues-details-modal">
           <button class="btn">Close</button>
         </div>
       </div>
@@ -215,29 +208,12 @@
         </div>
       </div>
     </section>
-    <!-- loding bar -->
-    <section id="loading" class="">
-      <!-- <div class="flex w-52 flex-col gap-4">
-        <div class="skeleton h-32 w-full"></div>
-        <div class="skeleton h-4 w-28"></div>
-        <div class="skeleton h-4 w-full"></div>
-        <div class="skeleton h-4 w-full"></div>
-      </div> -->
-
-      <div id="loding-bar" class="flex justify-center items-center">
+    <!-- Loading bar -->
+    <section id="loading">
+      <div id="loading-bar" class="flex justify-center items-center">
         <span class="loading loading-dots loading-xl"></span>
       </div>
-      <!-- <span class="loading loading-dots loading-xs"></span>
-      <span class="loading loading-dots loading-sm"></span>
-      <span class="loading loading-dots loading-md"></span>
-      <span class="loading loading-dots loading-lg"></span> -->
     </section>
     <script src="./src/script.js"></script>
   </body>
 </html>
-
-<!-- <p class=""></p> -->
-<!-- <img src="./assets/" alt=""> -->
-<!-- <p>Assignee: ${element.assignee}</p> -->
-<!-- <p>Created At: ${element.createdAt}</p> -->
-<!-- <p onclick=""></p> -->
