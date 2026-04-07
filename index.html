@@ -15,13 +15,21 @@
     <!-- tailwind css -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
+    <!-- daisy UI -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@5"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
     <link rel="stylesheet" href="./style/style.css" />
   </head>
-  <body class="bg-[#f3f4f6]">
-    <section id="login-page" class="hidden">
+  <body class="">
+    <section id="login-page" class="">
       <div class="grid mt-[85px] mb-[85px] place-items-center">
         <div
-          class="w-fit sm:w-[520px] h-auto bg-red-700 sm:bg-[#ffffffFF] p-8 rounded-xl"
+          class="w-fit sm:w-[520px] h-auto bg-[#ffffffFF] sm:bg-[#ffffffFF] p-8 rounded-xl shadow-[0_10px_30px_#00000014]"
         >
           <div class="github-info flex items-center flex-col">
             <img
@@ -75,9 +83,9 @@
         </div>
       </div>
     </section>
-    <section>
+    <section id="nav-bar" class="hidden">
       <nav
-        class="bg-[#ffffffFF] py-2 sm:py-5 flex sm:justify-around sm:items-center flex-col sm:flex-row sm:w-full sm:m-0 m-5"
+        class="bg-[#ffffffFF] py-2 sm:py-5 flex sm:justify-around sm:items-center flex-col sm:flex-row sm:w-full sm:m-0 m-5 shadow-[0_10px_30px_#00000014]"
         id="nav-bar"
       >
         <div
@@ -135,19 +143,19 @@
         <div class="">
           <button
             id="all-btn"
-            class="bg-[#4a00ffFF] w-[120px] h-[40px] rounded text-white"
+            class="bg-[#4a00ffFF] w-[120px] h-[40px] rounded text-white hover:cursor-pointer"
           >
             All
           </button>
           <button
             id="open-btn"
-            class="bg-white w-[120px] h-[40px] rounded text-black border border-[#e4e4e7FF] hover:bg-[#00a96eFF] hover:text-white"
+            class="bg-white w-[120px] h-[40px] rounded text-black border border-[#e4e4e7FF] hover:bg-[#00a96eFF] hover:text-white hover:cursor-pointer"
           >
             Open
           </button>
           <button
             id="close-btn"
-            class="bg-white w-[120px] h-[40px] rounded text-black border border-[#e4e4e7FF] hover:bg-[#a855f7FF] hover:text-white"
+            class="bg-white w-[120px] h-[40px] rounded text-black border border-[#e4e4e7FF] hover:bg-[#a855f7FF] hover:text-white hover:cursor-pointer"
           >
             Close
           </button>
@@ -161,7 +169,7 @@
         </div>
       </div>
     </section>
-    <section>
+    <section id="text-bar" class="hidden">
       <div class="mt-4 max-w-5xl mx-auto bg-[#ffffffFF] p-6 rounded-lg">
         <div class="flex justify-between items-center">
           <div class="flex items-center gap-2">
@@ -189,7 +197,19 @@
         </div>
       </div>
     </section>
-    <section>
+    <!-- modal section -->
+    <!-- Open the modal using ID.showModal() method -->
+    <!-- <button class="btn" onclick="my_modal_5.showModal()">open modal</button> -->
+    <dialog id="my_modal_5" class="modal modal-bottom sm:modal-middle">
+      <div class="modal-box">
+        <!-- <h3 class="text-lg font-bold">Hello!</h3>
+        <p class="py-4">Press ESC key or click the button below to close</p> -->
+        <div class="modal-action" id="issues-detailes-modal">
+          <button class="btn">Close</button>
+        </div>
+      </div>
+    </dialog>
+    <section id="card-c" class="hidden">
       <div class="bg-[#FBFBFB] max-w-5xl mx-auto">
         <div
           class="p-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
@@ -202,7 +222,9 @@
     <script src="./src/script.js"></script>
   </body>
 </html>
+
 <!-- <p class=""></p> -->
 <!-- <img src="./assets/" alt=""> -->
 <!-- <p>Assignee: ${element.assignee}</p> -->
 <!-- <p>Created At: ${element.createdAt}</p> -->
+<!-- <p onclick=""></p> -->
