@@ -16,15 +16,27 @@ const loginClick = () => {
   }
 };
 
+const manageLodingDots = (status) => {
+  if (status === true) {
+    document.getElementById("loding-bar").classList.remove("hidden");
+    document.getElementById("card-c").classList.add("hidden");
+  } else {
+    document.getElementById("loding-bar").classList.add("hidden");
+    document.getElementById("card-c").classList.remove("hidden");
+  }
+};
+
 const fatchApi = () => {
+  manageLodingDots(true);
+
   const url = fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues");
   url.then((res) => res.json()).then((data) => showGithubIssues(data.data));
 };
 
-const fetchingIdFromApi = () => {
-  const url = fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues");
-  url.then((res) => res.json()).then((data) => console.log(data.data));
-};
+// const fetchingIdFromApi = () => {
+//   const url = fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues");
+//   url.then((res) => res.json()).then((data) => console.log(data.data));
+// };
 
 const formatCreatedDate = (dateValue) => {
   const parsedDate = new Date(dateValue);
@@ -36,7 +48,7 @@ const formatCreatedDate = (dateValue) => {
   return parsedDate.toLocaleDateString("en-US");
 };
 
-fetchingIdFromApi();
+// fetchingIdFromApi();
 
 const openModal = (id) => {
   // find clicked issue
@@ -279,6 +291,7 @@ const showGithubIssues = (elements) => {
     `;
     cardContainer.append(card);
   });
+  manageLodingDots(false);
 };
 
 const whichBtnClikced = (btn) => {
@@ -361,4 +374,5 @@ window.addEventListener("load", function () {
     whichBtnClikced("all-btn");
   }
 });
+
 fatchApi();
