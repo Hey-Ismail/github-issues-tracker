@@ -26,7 +26,7 @@
     <link rel="stylesheet" href="./style/style.css" />
   </head>
   <body class="">
-    <section id="login-page" class="">
+    <section id="login-page" class="hidden">
       <div class="grid mt-[85px] mb-[85px] place-items-center">
         <div
           class="w-fit sm:w-[520px] h-auto bg-[#ffffffFF] sm:bg-[#ffffffFF] p-8 rounded-xl shadow-[0_10px_30px_#00000014]"
@@ -85,7 +85,7 @@
     </section>
     <section id="nav-bar" class="hidden">
       <nav
-        class="bg-[#ffffffFF] py-2 sm:py-5 flex sm:justify-around sm:items-center flex-col sm:flex-row sm:w-full sm:m-0 m-5 shadow-[0_10px_30px_#00000014]"
+        class="bg-[#ffffffFF] py-3 sm:py-5 flex sm:justify-around sm:items-center flex-col sm:flex-row sm:w-full sm:m-0 m-2 shadow-[0_10px_30px_#00000014]"
         id="nav-bar"
       >
         <div
@@ -138,9 +138,9 @@
       </nav>
       <!-- tab bar -->
       <div
-        class="max-w-5xl mx-auto mt-[60px] bg-[#ffffffFF] p-6 rounded-lg shadow-lg"
+        class="max-w-5xl mx-auto mt-[60px] bg-[#ffffffFF] p-6 rounded-lg shadow-lg flex justify-center items-center sm:justify-start"
       >
-        <div class="">
+        <div class="flex flex-col sm:flex-row gap-3">
           <button
             id="all-btn"
             class="bg-[#4a00ffFF] w-[120px] h-[40px] rounded text-white hover:cursor-pointer"
@@ -218,6 +218,23 @@
           <!-- GitHub issue cards will be dynamically inserted here -->
         </div>
       </div>
+    </section>
+    <!-- loding bar -->
+    <section id="loading" class="">
+      <!-- <div class="flex w-52 flex-col gap-4">
+        <div class="skeleton h-32 w-full"></div>
+        <div class="skeleton h-4 w-28"></div>
+        <div class="skeleton h-4 w-full"></div>
+        <div class="skeleton h-4 w-full"></div>
+      </div> -->
+
+      <div id="loding-bar" class="flex justify-center items-center">
+        <span class="loading loading-dots loading-xl"></span>
+      </div>
+      <!-- <span class="loading loading-dots loading-xs"></span>
+      <span class="loading loading-dots loading-sm"></span>
+      <span class="loading loading-dots loading-md"></span>
+      <span class="loading loading-dots loading-lg"></span> -->
     </section>
     <script src="./src/script.js"></script>
   </body>
