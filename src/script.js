@@ -1,9 +1,9 @@
+const ISSUES_API_URL = "https://phi-lab-server.vercel.app/api/v1/lab/issues";
+
 const loginClick = () => {
-  const loginBtn = document.getElementById("login-btn");
   const userNameInput = document.getElementById("username").value;
   const passwordInput = document.getElementById("password").value;
 
-  // console.log(userNameInput, passwordInput);
   if (userNameInput !== "admin" || passwordInput !== "admin123") {
     alert("Incorrect username or password");
   } else {
@@ -15,27 +15,27 @@ const loginClick = () => {
   }
 };
 
-const manageLodingDots = (status) => {
-  if (status === true) {
-    document.getElementById("loding-bar").classList.remove("hidden");
-    document.getElementById("card-c").classList.add("hidden");
-  } else {
-    document.getElementById("loding-bar").classList.add("hidden");
-    document.getElementById("card-c").classList.remove("hidden");
+const manageLoadingDots = (isLoading) => {
+  const loadingBar = document.getElementById("loading-bar");
+  const cardSection = document.getElementById("card-c");
+
+  if (isLoading) {
+    loadingBar.classList.remove("hidden");
+    cardSection.classList.add("hidden");
+    return;
   }
+
+  loadingBar.classList.add("hidden");
+  cardSection.classList.remove("hidden");
 };
 
-const fatchApi = () => {
-  manageLodingDots(true);
+const fetchApi = () => {
+  manageLoadingDots(true);
 
-  const url = fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues");
-  url.then((res) => res.json()).then((data) => showGithubIssues(data.data));
+  fetch(ISSUES_API_URL)
+    .then((res) => res.json())
+    .then((data) => showGithubIssues(data.data));
 };
-
-// const fetchingIdFromApi = () => {
-//   const url = fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues");
-//   url.then((res) => res.json()).then((data) => console.log(data.data));
-// };
 
 const formatCreatedDate = (dateValue) => {
   const parsedDate = new Date(dateValue);
@@ -47,25 +47,19 @@ const formatCreatedDate = (dateValue) => {
   return parsedDate.toLocaleDateString("en-US");
 };
 
-// fetchingIdFromApi();
-
 const openModal = (id) => {
-  // find clicked issue
   const issue = window.currentIssues.find(
     (item) => item.id == id || item.number == id,
   );
 
   if (!issue) return;
 
-  const modalContainer = document.getElementById("issues-detailes-modal");
+  const modalContainer = document.getElementById("issues-details-modal");
 
-  // status
   const status = issue.status?.toLowerCase() || "open";
 
-  // priority
   const priority = issue.priority?.toLowerCase() || "low";
 
-  // labels
   let labelsHtml = "";
 
   if (issue.labels && issue.labels.length > 0) {
@@ -88,7 +82,6 @@ const openModal = (id) => {
     });
   }
 
-  // date format
   let updatedDate = issue.updatedAt;
   let createdAt = formatCreatedDate(issue.createdAt);
 
@@ -200,38 +193,38 @@ const openModal = (id) => {
   document.getElementById("my_modal_5").showModal();
 };
 
-const showGithubIssues = (elements) => {
+const showGithubIssues = (issues) => {
   const cardContainer = document.getElementById("card-container");
-
   const issueCount = document.getElementById("issue-count");
 
-  issueCount.innerText = `${elements.length} Issues`;
+  issueCount.innerText = `${issues.length} Issues`;
   cardContainer.innerHTML = "";
-  window.currentIssues = elements;
+  window.currentIssues = issues;
 
-  elements.forEach((element) => {
+  issues.forEach((issue) => {
     const card = document.createElement("div");
     card.classList.add("issue-card");
+
     let topBorderColor = "border-t-green-500";
     let statusIcon = "./assets/Open-Status.png";
 
-    if (element.status === "closed") {
+    if (issue.status === "closed") {
       topBorderColor = "border-t-purple-700";
       statusIcon = "./assets/Closed- Status .png";
     }
 
     let priorityColor = "text-[#9ca3afFF] bg-[#eeeff2FF]";
 
-    if (element.priority === "high") {
+    if (issue.priority === "high") {
       priorityColor = "text-[#ef4444FF] bg-[#feececFF]";
-    } else if (element.priority === "medium") {
+    } else if (issue.priority === "medium") {
       priorityColor = "text-[#f59e0bFF] bg-[#fff6d1FF]";
     }
 
     let labelsHtml = "";
 
-    if (element.labels && element.labels.length > 0) {
-      element.labels.forEach((label) => {
+    if (issue.labels && issue.labels.length > 0) {
+      issue.labels.forEach((label) => {
         let labelStyle = "text-[#64748bFF] border-[#e4e4e7FF] bg-white";
 
         if (label === "bug") {
@@ -244,30 +237,31 @@ const showGithubIssues = (elements) => {
       });
     }
 
-    let updatedDate = element.updatedAt;
-    const makeDate = new Date(element.updatedAt);
-    if (!Number.isNaN(makeDate.getTime())) {
-      updatedDate = makeDate.toLocaleDateString("en-US");
+    let updatedDate = issue.updatedAt;
+    const updatedDateObject = new Date(issue.updatedAt);
+
+    if (!Number.isNaN(updatedDateObject.getTime())) {
+      updatedDate = updatedDateObject.toLocaleDateString("en-US");
     }
 
-    const issueNumber = element.number || element.id;
-    const issueId = element.id || element.number || "";
-    const createdAt = formatCreatedDate(element.createdAt);
+    const issueNumber = issue.number || issue.id;
+    const issueId = issue.id || issue.number || "";
+    const createdAt = formatCreatedDate(issue.createdAt);
 
-    card.className = `issue-card bg-white border border-[#e4e4e7FF] border-t-4 ${topBorderColor} rounded-xl `;
+    card.className = `issue-card bg-white border border-[#e4e4e7FF] border-t-4 ${topBorderColor} rounded-xl`;
 
     card.innerHTML = `
       <div onclick="openModal('${issueId}')" class="p-4 flex flex-col gap-3 hover:cursor-pointer">
         <div class="flex items-center justify-between">
           <img src="${statusIcon}" alt="status-icon" class="w-9 h-9" />
           <span class="px-6 py-2 rounded-full text-sm font-semibold uppercase ${priorityColor}">
-            ${(element.priority || "low").toUpperCase()}
+            ${(issue.priority || "low").toUpperCase()}
           </span>
         </div>
 
-        <p class="text-[#1f2937FF] font-semibold text-[20px] leading-[30px]">${element.title}</p>
-        
-        <p class="text-[#64748bFF] text-[16px] leading-[28px]">${element.description}</p>
+        <p class="text-[#1f2937FF] font-semibold text-[20px] leading-[30px]">${issue.title}</p>
+
+        <p class="text-[#64748bFF] text-[16px] leading-[28px]">${issue.description}</p>
 
         <div class="flex flex-wrap gap-2">
           ${labelsHtml}
@@ -275,25 +269,27 @@ const showGithubIssues = (elements) => {
       </div>
 
       <div class="border-t border-[#e4e4e7FF] p-4 text-sm leading-6 text-[#64748bFF] hover:cursor-pointer">
-        <div class="grid grid-cols-1  sm:grid-cols-2 sm:items-start">
+        <div class="grid grid-cols-1 sm:grid-cols-2 sm:items-start">
           <div class="flex flex-col">
-            <p># ${issueNumber} by ${element.author}</p>
-            <p>Assignee: ${element.assignee || "Unassigned"}</p>
+            <p># ${issueNumber} by ${issue.author}</p>
+            <p>Assignee: ${issue.assignee || "Unassigned"}</p>
           </div>
 
-          <div class=" sm:text-right">
+          <div class="sm:text-right">
             <p>${createdAt}</p>
-            <p>Updated : ${updatedDate}</p>
+            <p>Updated: ${updatedDate}</p>
           </div>
         </div>
       </div>
     `;
+
     cardContainer.append(card);
   });
-  manageLodingDots(false);
+
+  manageLoadingDots(false);
 };
 
-const whichBtnClikced = (btn) => {
+const whichBtnClicked = (btn) => {
   if (btn === "open-btn") {
     const openBtnStyle = document.getElementById("open-btn");
     openBtnStyle.style.backgroundColor = "#00a96eFF";
@@ -304,7 +300,7 @@ const whichBtnClikced = (btn) => {
     closeBtnStyle.style.color = "#a855f7FF";
 
     const allBtnStyle = document.getElementById("all-btn");
-    allBtnStyle.style.backgroundColor = "White";
+    allBtnStyle.style.backgroundColor = "white";
     allBtnStyle.style.color = "#4a00ffFF";
   } else if (btn === "close-btn") {
     const closeBtnStyle = document.getElementById("close-btn");
@@ -316,7 +312,7 @@ const whichBtnClikced = (btn) => {
     openBtnStyle.style.color = "#00a96eFF";
 
     const allBtnStyle = document.getElementById("all-btn");
-    allBtnStyle.style.backgroundColor = "White";
+    allBtnStyle.style.backgroundColor = "white";
     allBtnStyle.style.color = "#4a00ffFF";
   } else if (btn === "all-btn") {
     const allBtnStyle = document.getElementById("all-btn");
@@ -334,8 +330,7 @@ const whichBtnClikced = (btn) => {
 };
 
 document.getElementById("open-btn").addEventListener("click", function () {
-  const url = fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues");
-  url
+  fetch(ISSUES_API_URL)
     .then((res) => res.json())
     .then((data) => {
       const openIssues = data.data.filter(
@@ -344,12 +339,11 @@ document.getElementById("open-btn").addEventListener("click", function () {
       showGithubIssues(openIssues);
     });
 
-  whichBtnClikced("open-btn");
+  whichBtnClicked("open-btn");
 });
 
 document.getElementById("close-btn").addEventListener("click", function () {
-  const url = fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues");
-  url
+  fetch(ISSUES_API_URL)
     .then((res) => res.json())
     .then((data) => {
       const closedIssues = data.data.filter(
@@ -358,29 +352,52 @@ document.getElementById("close-btn").addEventListener("click", function () {
       showGithubIssues(closedIssues);
     });
 
-  whichBtnClikced("close-btn");
+  whichBtnClicked("close-btn");
 });
 
 document.getElementById("all-btn").addEventListener("click", function () {
-  fatchApi();
-  whichBtnClikced("all-btn");
+  fetchApi();
+  whichBtnClicked("all-btn");
 });
 
 window.addEventListener("load", function () {
   const loginPage = document.getElementById("login-page");
   if (loginPage.classList.contains("hidden")) {
-    fatchApi();
-    whichBtnClikced("all-btn");
+    fetchApi();
+    whichBtnClicked("all-btn");
   }
 });
 
-document.getElementById("logout-btn").addEventListener("click", function () {
-  document.getElementById("login-page").classList.remove("hidden");
-  document.getElementById("nav-bar").classList.add("hidden");
-  document.getElementById("text-bar").classList.add("hidden");
-  document.getElementById("card-c").classList.add("hidden");
-  document.getElementById("card-container").classList.remove("hidden");
+document.getElementById("search-btn").addEventListener("click", function () {
+  const searchText = document
+    .getElementById("input-search")
+    .value.trim()
+    .toLowerCase();
+
+  fetch(ISSUES_API_URL)
+    .then((res) => res.json())
+    .then((data) => {
+      const allIssues = data.data;
+      const filteredIssues = [];
+
+      for (const issue of allIssues) {
+        const title = issue.title ? issue.title.toLowerCase() : "";
+        const description = issue.description
+          ? issue.description.toLowerCase()
+          : "";
+        const labels = issue.labels ? issue.labels.join(" ").toLowerCase() : "";
+
+        if (
+          title.includes(searchText) ||
+          description.includes(searchText) ||
+          labels.includes(searchText)
+        ) {
+          filteredIssues.push(issue);
+        }
+      }
+
+      showGithubIssues(filteredIssues);
+    });
 });
 
-// if()
-fatchApi();
+fetchApi();
