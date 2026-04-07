@@ -7,12 +7,11 @@ const loginClick = () => {
   if (userNameInput !== "admin" || passwordInput !== "admin123") {
     alert("Incorrect username or password");
   } else {
-    const hideLoginPage = document.getElementById("login-page");
-    hideLoginPage.classList.add("hidden");
-
+    document.getElementById("login-page").classList.add("hidden");
     document.getElementById("nav-bar").classList.remove("hidden");
     document.getElementById("text-bar").classList.remove("hidden");
     document.getElementById("card-c").classList.remove("hidden");
+    document.getElementById("card-container").classList.remove("hidden");
   }
 };
 
@@ -375,4 +374,13 @@ window.addEventListener("load", function () {
   }
 });
 
+document.getElementById("logout-btn").addEventListener("click", function () {
+  document.getElementById("login-page").classList.remove("hidden");
+  document.getElementById("nav-bar").classList.add("hidden");
+  document.getElementById("text-bar").classList.add("hidden");
+  document.getElementById("card-c").classList.add("hidden");
+  document.getElementById("card-container").classList.remove("hidden");
+});
+
+// if()
 fatchApi();
